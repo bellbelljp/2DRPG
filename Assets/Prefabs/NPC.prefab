@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4228540275295049769}
   - component: {fileID: 4288190508129799707}
+  - component: {fileID: 3590086150880283470}
   m_Layer: 0
-  m_Name: CharacterPrefab
+  m_Name: NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +44,7 @@ Animator:
   m_GameObject: {fileID: 127582887434417945}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ee11fcdb20c08475b8bf7ca9c7d08dcd, type: 2}
+  m_Controller: {fileID: 9100000, guid: f3d9c6293fcb240cd88705854cfd8b62, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -54,6 +55,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3590086150880283470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127582887434417945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d894e5478921143e68150ca4b21ccab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSecond: 0.1
+  RPGSceneManager: {fileID: 0}
+  DoMoveCamera: 0
+  _pos: {x: 0, y: 0, z: 0}
+  _currentDir: 1
+  WaitSecond: 1
 --- !u!1 &2888471317223311871
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +99,7 @@ Transform:
   m_GameObject: {fileID: 2888471317223311871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0416667, y: 0.78125, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4228540275295049769}
@@ -127,14 +146,14 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 50
-  m_Sprite: {fileID: 21300000, guid: c48f704f6105a4388a7a50ba0fa81943, type: 3}
+  m_Sprite: {fileID: 1763760708, guid: 3b2d59592379846eeb0ebb01be820272, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
