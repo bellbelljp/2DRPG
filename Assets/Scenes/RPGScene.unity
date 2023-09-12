@@ -341,9 +341,17 @@ PrefabInstance:
       value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 3590086150880283470, guid: 78427054bd9b046519ad31d8b827d230, type: 3}
+      propertyPath: Event
+      value: 
+      objectReference: {fileID: 11400000, guid: ec776802849e948c5afe6d294ef03267, type: 2}
+    - target: {fileID: 3590086150880283470, guid: 78427054bd9b046519ad31d8b827d230, type: 3}
       propertyPath: _pos.x
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3590086150880283470, guid: 78427054bd9b046519ad31d8b827d230, type: 3}
+      propertyPath: RPGSceneManager
+      value: 
+      objectReference: {fileID: 109059544}
     - target: {fileID: 4228540275295049769, guid: 78427054bd9b046519ad31d8b827d230, type: 3}
       propertyPath: m_RootOrder
       value: 4

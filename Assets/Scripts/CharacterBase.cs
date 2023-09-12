@@ -9,6 +9,7 @@ public class CharacterBase : MonoBehaviour
 
 	public bool IsMoving { get => _moveCoroutine != null; }
 	public bool DoMoveCamera = false;
+	public MassEvent Event;
 
 	//スプライトスライス時に中心からずれたピボット分の値
 	private Vector3 playerPivot = new Vector3(0.16f, 0.16f, 0.0f);
