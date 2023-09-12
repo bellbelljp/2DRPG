@@ -67,6 +67,16 @@ public class CharacterBase : MonoBehaviour
 		if (RPGSceneManager == null) RPGSceneManager = Object.FindObjectOfType<RPGSceneManager>();
 
 		_moveCoroutine = StartCoroutine(MoveCoroutine(Pos));
+
+		var joinedMap = GetJoinedMap();
+		if (joinedMap != null)
+		{
+			joinedMap.AddCharacter(this);
+		}
+		else
+		{
+			RPGSceneManager.ActiveMap.AddCharacter(this);
+		}
 	}
 
 	/// <summary>コルーチンなしで位置セット</summary>
@@ -145,5 +155,17 @@ public class CharacterBase : MonoBehaviour
 	{
 		if (DoMoveCamera == true)
 			Camera.main.transform.position = transform.position + Vector3.forward * -10 + playerPivot;
+	}
+
+	public Map GetJoinedMap()
+	{
+		if (transform.parent != null)
+		{
+			return transform.parent.GetComponent<Map>();
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

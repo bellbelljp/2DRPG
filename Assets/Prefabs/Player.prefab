@@ -91,6 +91,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ee11fcdb20c08475b8bf7ca9c7d08dcd, type: 2}
+    - target: {fileID: 4302614397730543152, guid: 9b401196d29f946da8138741b644c623, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302614397730543152, guid: 9b401196d29f946da8138741b644c623, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b401196d29f946da8138741b644c623, type: 3}
 --- !u!1 &2634618560787394102 stripped
@@ -112,4 +120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSecond: 0.1
   RPGSceneManager: {fileID: 0}
+  DoMoveCamera: 0
   _pos: {x: 0, y: 0, z: 0}
+  _currentDir: 1

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 public class Map : MonoBehaviour
 {
@@ -10,13 +11,15 @@ public class Map : MonoBehaviour
 		public bool isMovable;
 		public TileBase eventTile;
 		public MassEvent massEvent;
+		public CharacterBase character;
 	}
-
-	public Grid Grid { get => GetComponent<Grid>(); }
-	Dictionary<string, Tilemap> _tilemaps;
 
 	[SerializeField]
 	List<MassEvent> _massEvents;
+
+	public Grid Grid { get => GetComponent<Grid>(); }
+	Dictionary<string, Tilemap> _tilemaps;
+	HashSet<CharacterBase> _characters = new HashSet<CharacterBase>();
 
 	readonly static string BACKGROND_TILEMAP_NAME = "Background";
 	readonly static string NONE_OBJECTS_TILEMAP_NAME = "NoneObjects";
@@ -33,6 +36,8 @@ public class Map : MonoBehaviour
 
 		// EventBoxを非表示にする
 		_tilemaps[EVENT_BOX_TILEMAP_NAME].gameObject.SetActive(false);
+
+		AddCharacter(Object.FindObjectOfType<Player>());
 	}
 
 	public Vector3 GetWorldPos(Vector3Int pos)
@@ -46,8 +51,13 @@ public class Map : MonoBehaviour
 		var mass = new Mass();
 		mass.eventTile = _tilemaps[EVENT_BOX_TILEMAP_NAME].GetTile(pos);
 		mass.isMovable = true;
+		mass.character = GetCharacter(pos);
 
-		if (mass.eventTile != null)
+		if (mass.character != null)
+		{
+			mass.isMovable = false;
+		}
+		else if (mass.eventTile != null)
 		{
 			// イベントマスに該当するイベントを取得する
 			mass.massEvent = FindMassEvent(mass.eventTile);
@@ -86,5 +96,18 @@ public class Map : MonoBehaviour
 			}
 		}
 		return false;
+	}
+
+	public void AddCharacter(CharacterBase character)
+	{
+		if (!_characters.Contains(character) && character != null)
+		{
+			_characters.Add(character);
+		}
+	}
+
+	public CharacterBase GetCharacter(Vector3Int pos)
+	{
+		return _characters.FirstOrDefault(_c => _c.Pos == pos);
 	}
 }
