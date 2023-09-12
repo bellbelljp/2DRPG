@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: MoveDungeonMapChip
+  m_Name: MoveFieldMapChip
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -589270810, guid: e2d634aebe9ab4be68230b8ee0e60ed2, type: 3}
+  m_DefaultSprite: {fileID: -1586024061, guid: e2d634aebe9ab4be68230b8ee0e60ed2, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules: []
