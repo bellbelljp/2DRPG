@@ -47,8 +47,9 @@ public class Map : MonoBehaviour
 		mass.eventTile = _tilemaps[EVENT_BOX_TILEMAP_NAME].GetTile(pos);
 		mass.isMovable = true;
 
-		if(mass.eventTile != null)
+		if (mass.eventTile != null)
 		{
+			// イベントマスに該当するイベントを取得する
 			mass.massEvent = FindMassEvent(mass.eventTile);
 		}
 		else if (_tilemaps[OBJECTS_TILEMAP_NAME].GetTile(pos))
@@ -67,4 +68,23 @@ public class Map : MonoBehaviour
 		return _massEvents.Find(_c => _c.Tile == tile);
 	}
 
+	/// <summary>該当マスの位置を取得</summary>
+	public bool FindMassEventPos(TileBase tile, out Vector3Int pos)
+	{
+		var eventLayer = _tilemaps[EVENT_BOX_TILEMAP_NAME];
+		var renderer = eventLayer.GetComponent<Renderer>();
+		var min = eventLayer.LocalToCell(renderer.bounds.min);
+		var max = eventLayer.LocalToCell(renderer.bounds.max);
+		pos = Vector3Int.zero;
+		// イベントレイヤーの端から端までチェックして、該当のマスがあるかチェック
+		for (pos.y = min.y; pos.y < max.y; ++pos.y)
+		{
+			for (pos.x = min.x; pos.x < max.x; ++pos.x)
+			{
+				var t = eventLayer.GetTile(pos);
+				if (t == tile) return true;
+			}
+		}
+		return false;
+	}
 }

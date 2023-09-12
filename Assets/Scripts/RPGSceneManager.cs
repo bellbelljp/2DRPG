@@ -22,12 +22,17 @@ public class RPGSceneManager : MonoBehaviour
 			if (GetArrowInput(out var move))
 			{
 				var movedPos = Player.Pos + move;
+				// 移動先のマスを取得
 				var massData = ActiveMap.GetMassData(movedPos);
 				Player.SetDir(move);
 				if (massData.isMovable)
 				{
 					Player.Pos = movedPos;
 					yield return new WaitWhile(() => Player.IsMoving);
+					if (massData.massEvent != null)
+					{
+						massData.massEvent.Exec(this);
+					}
 				}
 			}
 			yield return null;
