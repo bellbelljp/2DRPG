@@ -6,8 +6,11 @@ public class RPGSceneManager : MonoBehaviour
 {
 	public Player Player;
 	public Map ActiveMap;
+	public MessageWindow MessageWindow;
 
 	Coroutine _currentCoroutine;
+
+	public bool IsPauseScene { get { return !MessageWindow.IsEndMessage; } }
 
 	void Start()
 	{
@@ -34,8 +37,12 @@ public class RPGSceneManager : MonoBehaviour
 						massData.massEvent.Exec(this);
 					}
 				}
+				else if (massData.character != null && massData.character.Event != null)
+				{
+					massData.character.Event.Exec(this);
+				}
 			}
-			yield return null;
+			yield return new WaitWhile(() => IsPauseScene);
 		}
 	}
 
@@ -66,6 +73,7 @@ public class RPGSceneManager : MonoBehaviour
 	/// <summary>メッセージウィンドウを表示</summary>
 	public void ShowMessageWindow(string message)
 	{
-
+		MessageWindow.StartMessage(message);
 	}
+
 }
