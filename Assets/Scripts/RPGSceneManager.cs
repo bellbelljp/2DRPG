@@ -7,10 +7,11 @@ public class RPGSceneManager : MonoBehaviour
 	public Player Player;
 	public Map ActiveMap;
 	public MessageWindow MessageWindow;
+	public Menu Menu;
 
 	Coroutine _currentCoroutine;
 
-	public bool IsPauseScene { get { return !MessageWindow.IsEndMessage; } }
+	public bool IsPauseScene { get { return !MessageWindow.IsEndMessage || Menu.DoOpen; } }
 
 	void Start()
 	{
@@ -43,6 +44,11 @@ public class RPGSceneManager : MonoBehaviour
 				}
 			}
 			yield return new WaitWhile(() => IsPauseScene);
+
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				OpenMenu();
+			}
 		}
 	}
 
@@ -76,4 +82,8 @@ public class RPGSceneManager : MonoBehaviour
 		MessageWindow.StartMessage(message);
 	}
 
+	public void OpenMenu()
+	{
+		Menu.Open();
+	}
 }
