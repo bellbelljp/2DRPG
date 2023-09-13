@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2199241de2efe47dc9a75b8fbd5bf02e, type: 3}
+  m_Name: BattleParameter
+  m_EditorClassIdentifier: 
+  Data:
+    HP: 15
+    MaxHP: 15
+    Attack: 5
+    Defense: 2
+    Level: 1
+    Exp: 0
+    Money: 100
+    AttackWeapon: {fileID: 11400000, guid: 716ed087d7bf44e28b90bcaff9d125f5, type: 2}
+    DefenseWeapon: {fileID: 11400000, guid: 45862a090a0944555a722c9a7bfc6e8b, type: 2}
+    Items:
+    - {fileID: 11400000, guid: e1054f7a3d67e422bbb9727ad9bd6a4f, type: 2}
+    - {fileID: 11400000, guid: e1054f7a3d67e422bbb9727ad9bd6a4f, type: 2}
+    - {fileID: 11400000, guid: 43cc79cdcc4da4482af4e7f619b66029, type: 2}

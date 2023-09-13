@@ -121,5 +121,18 @@ MonoBehaviour:
   MoveSecond: 0.1
   RPGSceneManager: {fileID: 0}
   DoMoveCamera: 0
+  Event: {fileID: 0}
   _pos: {x: 0, y: 0, z: 0}
   _currentDir: 1
+  InitialBattleParameter: {fileID: 11400000, guid: d27b97fe4ab22485793f603135c40bd9, type: 2}
+  BattleParameter:
+    HP: 0
+    MaxHP: 0
+    Attack: 0
+    Defense: 0
+    Level: 0
+    Exp: 0
+    Money: 0
+    AttackWeapon: {fileID: 0}
+    DefenseWeapon: {fileID: 0}
+    Items: []
