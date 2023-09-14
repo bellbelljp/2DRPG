@@ -6,23 +6,32 @@ using System.Linq;
 
 public class MainMenu : Menu
 {
-	[SerializeField] protected RPGSceneManager RPGSceneManager;
+	[SerializeField]
+	protected RPGSceneManager RPGSceneManager;
 
 	public GameObject ParameterRoot;
 	public MenuRoot ItemInventory;
 	public Text Description;
 
+	/// <summary>アイテム使用</summary>
 	public void UseItem()
 	{
+		// アイテム選択
 		var index = CurrentMenuObj.Index;
 		var player = RPGSceneManager.Player;
 		var item = GetItem(player.BattleParameter, index);
+
+		// アイテム使用
 		if (item == null || item is Weapon) return;
 		item.Use(player.BattleParameter);
+
+		//消費したアイテムを消す
 		int offset = 0;
 		if (player.BattleParameter.AttackWeapon != null) offset++;
 		if (player.BattleParameter.DefenseWeapon != null) offset++;
 		player.BattleParameter.Items.RemoveAt(index - offset);
+
+		// UI更新
 		UpdateUI();
 	}
 
@@ -91,7 +100,7 @@ public class MainMenu : Menu
 		textObj.text = text;
 	}
 
-	/// <summary>アイテムを取得</summary>
+	/// <summary>プレイヤーの持ち物からアイテムを取得</summary>
 	Item GetItem(BattleParameterBase param, int index)
 	{
 		int i = 0;

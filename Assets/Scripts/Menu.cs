@@ -8,8 +8,28 @@ using UnityEditor;
 public class Menu : MonoBehaviour
 {
 	public MenuRoot FirstMenuRoot;
+	public MenuRoot CurrentMenuObj
+	{
+		get => _menuRootStack.Peek();
+	}
+	public MenuItem CurrentItem
+	{
+		get
+		{
+			var top = _menuRootStack.Peek();
+			return top.CurrentItem;
+		}
+	}
 
 	public bool DoOpen { get => gameObject.activeSelf; }
+
+	Stack<MenuRoot> _menuRootStack;
+
+	protected virtual void Awake()
+	{
+		gameObject.SetActive(false);
+	}
+
 	public virtual void Open()
 	{
 		gameObject.SetActive(true);
@@ -24,27 +44,6 @@ public class Menu : MonoBehaviour
 			_menuRootStack.Pop();
 		}
 	}
-
-	protected virtual void Awake()
-	{
-		gameObject.SetActive(false);
-	}
-
-	public MenuRoot CurrentMenuObj
-	{
-		get => _menuRootStack.Peek();
-	}
-
-	public MenuItem CurrentItem
-	{
-		get
-		{
-			var top = _menuRootStack.Peek();
-			return top.CurrentItem;
-		}
-	}
-
-	Stack<MenuRoot> _menuRootStack;
 
 	IEnumerator UpdateWhenOpen()
 	{

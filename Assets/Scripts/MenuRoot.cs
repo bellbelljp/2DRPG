@@ -65,6 +65,12 @@ public class MenuRoot : MonoBehaviour
 		get => MenuItems.Count(_i => _i.gameObject.activeSelf);
 	}
 
+	private void Awake()
+	{
+		UpdateMenuItemSelecting(true);
+	}
+
+	/// <summary>選択中アイテムを更新</summary>
 	void UpdateMenuItemSelecting(bool allDeactive)
 	{
 		var items = GetComponentsInChildren<MenuItem>();
@@ -72,10 +78,5 @@ public class MenuRoot : MonoBehaviour
 		{
 			items[i].IsSelecting = allDeactive ? false : i == _index;
 		}
-	}
-
-	private void Awake()
-	{
-		UpdateMenuItemSelecting(true);
 	}
 }
