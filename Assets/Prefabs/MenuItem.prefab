@@ -100,6 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4358246201116546917}
+  - component: {fileID: 2240716438367540559}
   m_Layer: 5
   m_Name: MenuItem
   m_TagString: Untagged
@@ -129,6 +130,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2240716438367540559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015224352295845859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f792b8791a304c4b84c0126361577e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorObj: {fileID: 934141498113615524}
+  TextObj: {fileID: 6875091199000368585}
+  _isSelecting: 0
+  CurrentKind: 0
+  MoveTargetObj: {fileID: 0}
+  Callbacks:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8741921128782085398
 GameObject:
   m_ObjectHideFlags: 0
