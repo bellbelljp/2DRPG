@@ -13,7 +13,15 @@ public class MainMenu : Menu
 
 	public void UseItem()
 	{
-		//TODO
+		var index = CurrentMenuObj.Index;
+		var player = RPGSceneManager.Player;
+		var item = GetItem(player.BattleParameter, index);
+		if (item == null || item is Weapon) return;
+		item.Use(player.BattleParameter);
+		int offset = 0;
+		if (player.BattleParameter.AttackWeapon != null) offset++;
+		if (player.BattleParameter.DefenseWeapon != null) offset++;
+		player.BattleParameter.Items.RemoveAt(index - offset);
 		UpdateUI();
 	}
 
@@ -79,5 +87,28 @@ public class MainMenu : Menu
 		var root = ParameterRoot.transform.Find(name);
 		var textObj = root.Find("Text").GetComponent<Text>();
 		textObj.text = text;
+	}
+
+	/// <summary>アイテムを取得</summary>
+	Item GetItem(BattleParameterBase param, int index)
+	{
+		int i = 0;
+		if (param.AttackWeapon != null)
+		{
+			if (index == i) return param.AttackWeapon;
+			i++;
+		}
+		if (param.DefenseWeapon != null)
+		{
+			if (index == i) return param.DefenseWeapon;
+			i++;
+		}
+
+		index -= i;
+		for (var itemIndex = 0; itemIndex < param.Items.Count; ++itemIndex)
+		{
+			if (index == itemIndex) return param.Items[itemIndex];
+		}
+		return null;
 	}
 }
