@@ -10,6 +10,7 @@ public class MainMenu : Menu
 
 	public GameObject ParameterRoot;
 	public MenuRoot ItemInventory;
+	public Text Description;
 
 	public void UseItem()
 	{
@@ -35,6 +36,7 @@ public class MainMenu : Menu
 	{
 		UpdateItems();
 		UpdateParameters();
+		UpdateDescription();
 	}
 
 	void UpdateItems()
@@ -110,5 +112,23 @@ public class MainMenu : Menu
 			if (index == itemIndex) return param.Items[itemIndex];
 		}
 		return null;
+	}
+
+	protected override void ChangeMenuItem(MenuRoot menuRoot)
+	{
+		UpdateDescription();
+	}
+
+	void UpdateDescription()
+	{
+		if (CurrentMenuObj == ItemInventory)
+		{
+			Description.transform.parent.gameObject.SetActive(true);
+			Description.text = GetItem(RPGSceneManager.Player.BattleParameter, CurrentMenuObj.Index).Description;
+		}
+		else
+		{
+			Description.transform.parent.gameObject.SetActive(false);
+		}
 	}
 }
