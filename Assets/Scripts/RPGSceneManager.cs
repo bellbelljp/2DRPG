@@ -8,10 +8,11 @@ public class RPGSceneManager : MonoBehaviour
 	public Map ActiveMap;
 	public MessageWindow MessageWindow;
 	public Menu Menu;
+	public ItemShopMenu ItemShopMenu;
 
 	Coroutine _currentCoroutine;
 
-	public bool IsPauseScene { get { return !MessageWindow.IsEndMessage || Menu.DoOpen; } }
+	public bool IsPauseScene { get { return !MessageWindow.IsEndMessage || Menu.DoOpen || ItemShopMenu.DoOpen; } }
 
 	void Start()
 	{

@@ -22,6 +22,7 @@ public class Menu : MonoBehaviour
 	}
 
 	public bool DoOpen { get => gameObject.activeSelf; }
+	public bool EnableInput { get; set; } = true;
 
 	Stack<MenuRoot> _menuRootStack;
 
@@ -47,6 +48,7 @@ public class Menu : MonoBehaviour
 
 	IEnumerator UpdateWhenOpen()
 	{
+		EnableInput = true;
 		var menuRoots = GetComponentsInChildren<MenuRoot>();
 		foreach (var root in menuRoots)
 		{
@@ -80,7 +82,7 @@ public class Menu : MonoBehaviour
 			{
 				Cancel(current);
 			}
-			yield return null;
+			yield return new WaitUntil(() => EnableInput);
 		}
 		gameObject.SetActive(false);
 	}

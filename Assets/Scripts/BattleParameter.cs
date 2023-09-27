@@ -24,6 +24,7 @@ public class BattleParameterBase
 
 	public int AttackPower { get => Attack + (AttackWeapon != null ? AttackWeapon.Power : 0); }
 	public int DefensePower { get => Defense + (DefenseWeapon != null ? DefenseWeapon.Power : 0); }
+	public bool IsLimitItemCount { get => Items.Count >= 4; }
 
 	public virtual void CopyTo(BattleParameterBase dest)
 	{
