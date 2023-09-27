@@ -6,6 +6,8 @@ public class NPC : CharacterBase
 {
 	[SerializeField, Range(0.1f, 5f)] float WaitSecond = 1f;
 
+	public bool DoMovable = true;
+
 	protected override void Start()
 	{
 		base.Start();
@@ -18,6 +20,8 @@ public class NPC : CharacterBase
 		var rnd = new System.Random();
 		while (true)
 		{
+			yield return new WaitWhile(() => !DoMovable);
+
 			// 会話直後に移動させなくするためのもの
 			yield return new WaitWhile(() => RPGSceneManager.IsPauseScene);
 
