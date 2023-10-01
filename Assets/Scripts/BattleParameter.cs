@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class BattleParameterBase
 {
+	public class AttackResult
+	{
+		public int LeaveHP;
+		public int Damage;
+	}
+
 	[Min(1)] public int HP;
 	[Min(1)] public int MaxHP;
 
@@ -25,6 +32,7 @@ public class BattleParameterBase
 	public int AttackPower { get => Attack + (AttackWeapon != null ? AttackWeapon.Power : 0); }
 	public int DefensePower { get => Defense + (DefenseWeapon != null ? DefenseWeapon.Power : 0); }
 	public bool IsLimitItemCount { get => Items.Count >= 4; }
+	public bool IsNowDefense { get; set; } = false;
 
 	public virtual void CopyTo(BattleParameterBase dest)
 	{
@@ -41,6 +49,20 @@ public class BattleParameterBase
 
 		dest.Items = new List<Item>(Items.ToArray());
 	}
+
+	public virtual bool AttackTo(BattleParameterBase target, out AttackResult result)
+	{
+		result = new AttackResult();
+
+		result.Damage = Mathf.Max(0, AttackPower - target.DefensePower);
+		if (target.IsNowDefense)
+		{
+			result.Damage /= 2;
+		}
+		target.HP -= result.Damage;
+		result.LeaveHP = target.HP;
+		return target.HP <= 0;
+	}
 }
 
 [CreateAssetMenu(menuName = "BattleParameter")]
@@ -48,3 +70,4 @@ public class BattleParameter : ScriptableObject
 {
 	public BattleParameterBase Data;
 }
+

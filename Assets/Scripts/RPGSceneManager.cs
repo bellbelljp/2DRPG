@@ -9,10 +9,26 @@ public class RPGSceneManager : MonoBehaviour
 	public MessageWindow MessageWindow;
 	public Menu Menu;
 	public ItemShopMenu ItemShopMenu;
+	[SerializeField] public BattleWindow BattleWindow;
 
 	Coroutine _currentCoroutine;
 
-	public bool IsPauseScene { get { return !MessageWindow.IsEndMessage || Menu.DoOpen || ItemShopMenu.DoOpen; } }
+	public bool IsPauseScene
+	{
+		get
+		{
+			return !MessageWindow.IsEndMessage || Menu.DoOpen ||
+				ItemShopMenu.DoOpen || BattleWindow.DoOpen;
+		}
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.W))
+		{
+			BattleWindow.Open();
+		}
+	}
 
 	void Start()
 	{
