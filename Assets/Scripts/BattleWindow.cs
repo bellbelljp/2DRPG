@@ -14,6 +14,9 @@ public class BattleWindow : Menu
 	[SerializeField] Text Description;
 	[SerializeField] GameObject ParameterRoot;
 	[SerializeField] EncounterEnemies UseEncounter;
+	[SerializeField] Animator AttackEffectPrefab;
+	Animator AttackEffect;
+
 	public EncounterEnemies Encounter { get; private set; }
 
 	bool DoEscape { get; set; }
@@ -112,7 +115,10 @@ public class BattleWindow : Menu
 		var enemy = Encounter.Enemies[enemyIndex];
 
 		var turnInfo = new TurnInfo();
-		turnInfo.Message = $"{enemy.Name}にこうげき！";
+		turnInfo.Message = $"{enemy.Name}にこうげき！\n" +
+			$"<ANIMATION> 0 Attack";
+		AttackEffect = Object.Instantiate(AttackEffectPrefab, CurrentItem.transform);
+		turnInfo.Effects = new Animator[] { AttackEffect };
 		turnInfo.DoneCommand = () =>
 		{
 			var player = RPGSceneManager.Player.BattleParameter;
@@ -231,6 +237,7 @@ public class BattleWindow : Menu
 		var messageWindow = RPGSceneManager.MessageWindow;
 		turnInfo.ShowMessageWindow(messageWindow);
 		yield return new WaitWhile(() => !messageWindow.IsEndMessage);
+		if (AttackEffect != null) { Destroy(AttackEffect.gameObject); }
 		if (turnInfo.DoneCommand != null) turnInfo.DoneCommand();
 		yield return new WaitWhile(() => !messageWindow.IsEndMessage);
 		UpdateUI();
