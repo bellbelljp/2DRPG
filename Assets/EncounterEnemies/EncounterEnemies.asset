@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: EncounterEnemies
   m_EditorClassIdentifier: 
   EscapeSuccessRate: 0.7
-  Enemies: []
+  Enemies:
+  - {fileID: 11400000, guid: 0a3a6a6a131364d9bbcaac0fdeedb59d, type: 2}
+  - {fileID: 11400000, guid: 0a3a6a6a131364d9bbcaac0fdeedb59d, type: 2}
