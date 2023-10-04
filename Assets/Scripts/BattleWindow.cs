@@ -23,6 +23,9 @@ public class BattleWindow : Menu
 	[Min(0)] public float EscapeWaitSecond = 1f;
 	Coroutine _turnCoroutine;
 
+	public BattleParameterBase Player { get => RPGSceneManager.Player.BattleParameter; }
+	public RPGSceneManager GetRPGSceneManager { get => RPGSceneManager; }
+
 	public override void Open()
 	{
 		base.Open();
