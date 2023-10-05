@@ -9,6 +9,7 @@ public class RPGSceneManager : MonoBehaviour
 	public MessageWindow MessageWindow;
 	public Menu Menu;
 	public ItemShopMenu ItemShopMenu;
+	public Vector3Int MassEventPos { get; private set; }
 	[SerializeField] public BattleWindow BattleWindow;
 
 	Coroutine _currentCoroutine;
@@ -44,6 +45,7 @@ public class RPGSceneManager : MonoBehaviour
 					yield return new WaitWhile(() => Player.IsMoving);
 					if (massData.massEvent != null)
 					{
+						MassEventPos = movedPos;
 						massData.massEvent.Exec(this);
 					}
 					else if (ActiveMap.RandomEncount != null)
@@ -59,6 +61,7 @@ public class RPGSceneManager : MonoBehaviour
 				}
 				else if (massData.character != null && massData.character.Event != null)
 				{
+					MassEventPos = movedPos;
 					massData.character.Event.Exec(this);
 				}
 			}
