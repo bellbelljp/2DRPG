@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _massEvents:
   - {fileID: 11400000, guid: 2a2650ca80a774d1f8fc586bf5d7c2d1, type: 2}
+  RandomEncount: {fileID: 11400000, guid: 940511044ef514d97a2a3c707b69ae48, type: 2}
 --- !u!1 &1621147604258795073
 GameObject:
   m_ObjectHideFlags: 0

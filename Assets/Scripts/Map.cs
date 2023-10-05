@@ -20,6 +20,7 @@ public class Map : MonoBehaviour
 	public Grid Grid { get => GetComponent<Grid>(); }
 	Dictionary<string, Tilemap> _tilemaps;
 	HashSet<CharacterBase> _characters = new HashSet<CharacterBase>();
+	public RandomEncount RandomEncount;
 
 	readonly static string BACKGROND_TILEMAP_NAME = "Background";
 	readonly static string NONE_OBJECTS_TILEMAP_NAME = "NoneObjects";
