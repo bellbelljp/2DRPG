@@ -23,6 +23,10 @@ public class BattleParameterBase
 	[Min(0)] public int Exp;
 	[Min(0)] public int Money;
 
+	[Min(1)] public int LimitAttack = 100;
+	[Min(1)] public int LimitDefense = 100;
+	[Min(1)] public int LimitHP = 500;
+
 	public Weapon AttackWeapon;
 	public Weapon DefenseWeapon;
 
@@ -48,6 +52,10 @@ public class BattleParameterBase
 		dest.DefenseWeapon = DefenseWeapon;
 
 		dest.Items = new List<Item>(Items.ToArray());
+
+		dest.LimitAttack = LimitAttack;
+		dest.LimitDefense = LimitDefense;
+		dest.LimitHP = LimitHP;
 	}
 
 	public virtual bool AttackTo(BattleParameterBase target, out AttackResult result)
@@ -62,6 +70,26 @@ public class BattleParameterBase
 		target.HP -= result.Damage;
 		result.LeaveHP = target.HP;
 		return target.HP <= 0;
+	}
+
+	public bool GetExp(int exp)
+	{
+		Exp += exp;
+
+		if (Exp >= (Level + 1) * 100)
+		{
+			AdjustParamWithLevel();
+			return true;
+		}
+		return false;
+	}
+
+	public void AdjustParamWithLevel()
+	{
+		Level = Exp / 100;
+		Attack = (int)(LimitAttack * Level / 100f);
+		Defense = (int)(LimitDefense * Level / 100f);
+		MaxHP = (int)(LimitHP * Level / 100f);
 	}
 }
 
