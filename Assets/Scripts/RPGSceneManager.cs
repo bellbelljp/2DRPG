@@ -14,6 +14,8 @@ public class RPGSceneManager : MonoBehaviour
 	[SerializeField, TextArea(3, 15)] string GameOverMessage = "体力が無くなった...";
 	[SerializeField] Map RespawnMapPrefab;
 	[SerializeField] Vector3Int RespawnPos;
+	[SerializeField, TextArea(3, 15)] string GameClearMessage = "ゲームクリアー";
+	[SerializeField] GameClear gameClearObj;
 
 	Coroutine _currentCoroutine;
 
@@ -118,6 +120,7 @@ public class RPGSceneManager : MonoBehaviour
 		Menu.Open();
 	}
 
+	/// <summary>ゲームオーバー</summary>
 	IEnumerator GameOver()
 	{
 		MessageWindow.StartMessage(GameOverMessage);
@@ -126,6 +129,7 @@ public class RPGSceneManager : MonoBehaviour
 		RespawnMap(true);
 	}
 
+	/// <summary>リスポーン</summary>
 	void RespawnMap(bool isGameOver)
 	{
 		Object.Destroy(ActiveMap.gameObject);
@@ -144,5 +148,24 @@ public class RPGSceneManager : MonoBehaviour
 			StopCoroutine(_currentCoroutine);
 		}
 		_currentCoroutine = StartCoroutine(MovePlayer());
+	}
+
+	public void GameClear()
+	{
+		StopCoroutine(_currentCoroutine);
+
+		_currentCoroutine = StartCoroutine(GameClearCoroutine());
+	}
+
+	IEnumerator GameClearCoroutine()
+	{
+		MessageWindow.StartMessage(GameClearMessage);
+		yield return new WaitUntil(() => MessageWindow.IsEndMessage);
+
+		gameClearObj.StartMessage(gameClearObj.Message);
+		yield return new WaitWhile(() => gameClearObj.DoOpen);
+
+		_currentCoroutine = null;
+		RespawnMap(false);
 	}
 }

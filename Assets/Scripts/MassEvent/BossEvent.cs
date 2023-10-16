@@ -30,11 +30,12 @@ public class BossEvent : MassEvent
 
 		if (manager.Player.BattleParameter.HP <= 0)
 		{
-			Debug.Log("Fail Boss Battle...");
+			//Debug.Log("Fail Boss Battle...");
 		}
 		else
 		{
 			Boss.Kill();
+			manager.GameClear();
 		}
 	}
 }
