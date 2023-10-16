@@ -634,6 +634,9 @@ MonoBehaviour:
   Menu: {fileID: 857364392}
   ItemShopMenu: {fileID: 63042246}
   BattleWindow: {fileID: 1544426240}
+  GameOverMessage: "\u4F53\u529B\u304C\u7121\u304F\u306A\u3063\u305F..."
+  RespawnMapPrefab: {fileID: 520707461746563873, guid: 1a22c302e7ba14fa3a666a3cc2bdec00, type: 3}
+  RespawnPos: {x: 0, y: 0, z: 0}
 --- !u!4 &109059545
 Transform:
   m_ObjectHideFlags: 0
