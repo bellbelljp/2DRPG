@@ -11,6 +11,7 @@ public class RPGSceneManager : MonoBehaviour
 	public ItemShopMenu ItemShopMenu;
 	public Vector3Int MassEventPos { get; private set; }
 	public ItemList ItemList;
+	public TitleMenu TitleMenu;
 	[SerializeField] public BattleWindow BattleWindow;
 	[SerializeField, TextArea(3, 15)] string GameOverMessage = "体力が無くなった...";
 	[SerializeField] Map RespawnMapPrefab;
@@ -31,7 +32,33 @@ public class RPGSceneManager : MonoBehaviour
 
 	void Start()
 	{
+		StartTitle();
+	}
+
+	public void StartTitle()
+	{
+		StopCurrentCoroutine();
+		Player.gameObject.SetActive(false);
+		if (ActiveMap != null) ActiveMap.gameObject.SetActive(false);
+		TitleMenu.Open();
+	}
+
+	public void StartGame()
+	{
+		StopCurrentCoroutine();
+		TitleMenu.Close();
+		Player.gameObject.SetActive(true);
+		if (ActiveMap != null) ActiveMap.gameObject.SetActive(true);
 		_currentCoroutine = StartCoroutine(MovePlayer());
+	}
+
+	void StopCurrentCoroutine()
+	{
+		if (_currentCoroutine != null)
+		{
+			StopCoroutine(_currentCoroutine);
+			_currentCoroutine = null;
+		}
 	}
 
 	/// <summary>プレイヤーの移動</summary>

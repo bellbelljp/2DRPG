@@ -130,4 +130,14 @@ public class SaveData : MonoBehaviour
 			PlayerPrefs.DeleteKey(key);
 		}
 	}
+
+	public bool HaveSave
+	{
+		get => PlayerPrefs.HasKey("player");
+	}
+
+	public void ClearSave()
+	{
+		PlayerPrefs.DeleteAll();
+	}
 }
