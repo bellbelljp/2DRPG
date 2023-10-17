@@ -28,6 +28,9 @@ public class BattleWindow : Menu
 
 	public override void Open()
 	{
+		var saveData = Object.FindObjectOfType<SaveData>();
+		saveData.SaveTemporary(RPGSceneManager.ActiveMap);
+
 		base.Open();
 		MainCommands.Index = 0;
 		DoEscape = false;

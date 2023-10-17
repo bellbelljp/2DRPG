@@ -92,8 +92,21 @@ public class CharacterBase : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		if (RPGSceneManager == null)
+			RPGSceneManager = Object.FindObjectOfType<RPGSceneManager>();
+
 		InitialPos = Pos;
 		SetDirAnimation(_currentDir);
+
+		var joinedMap = GetJoinedMap();
+		if (joinedMap != null)
+		{
+			joinedMap.AddCharacter(this);
+		}
+		else
+		{
+			RPGSceneManager.ActiveMap.AddCharacter(this);
+		}
 	}
 
 	protected virtual void Start()
@@ -116,6 +129,12 @@ public class CharacterBase : MonoBehaviour
 	/// <summary>コルーチンなしで位置セット</summary>
 	public virtual void SetPosNoCoroutine(Vector3Int pos)
 	{
+		if (_moveCoroutine != null)
+		{
+			StopCoroutine(_moveCoroutine);
+			_moveCoroutine = null;
+		}
+
 		_pos = pos;
 		transform.position = RPGSceneManager.ActiveMap.Grid.CellToWorld(pos);
 		MoveCamera();
@@ -203,7 +222,6 @@ public class CharacterBase : MonoBehaviour
 		}
 	}
 
-
 	public virtual InstantSaveData GetInstantSaveData()
 	{
 		return new InstantSaveData(this);
@@ -212,5 +230,17 @@ public class CharacterBase : MonoBehaviour
 	public virtual SaveData GetSaveData()
 	{
 		return null;
+	}
+
+	public virtual void LoadInstantSaveData(string saveDataJson)
+	{
+		var saveData = JsonUtility.FromJson<InstantSaveData>(saveDataJson);
+		SetPosNoCoroutine(saveData.Pos);
+		CurrentDir = saveData.Direction;
+	}
+
+	public virtual void LoadSaveData(string saveDataJson)
+	{
+
 	}
 }
