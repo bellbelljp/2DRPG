@@ -140,4 +140,21 @@ public class MainMenu : Menu
 			Description.transform.parent.gameObject.SetActive(false);
 		}
 	}
+
+	public void Save()
+	{
+		StartCoroutine(SaveCoroutine());
+	}
+
+	IEnumerator SaveCoroutine()
+	{
+		var saveData = Object.FindObjectOfType<SaveData>();
+		saveData.Save(RPGSceneManager);
+
+		EnableInput = false;
+		RPGSceneManager.MessageWindow.StartMessage("セーブしました。");
+
+		yield return new WaitUntil(() => RPGSceneManager.MessageWindow.IsEndMessage);
+		EnableInput = true;
+	}
 }

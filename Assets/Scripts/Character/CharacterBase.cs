@@ -4,6 +4,34 @@ using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
 {
+	[System.Serializable]
+	public class InstantSaveData
+	{
+		public string id;
+		public Vector3Int Pos;
+		public Direction Direction;
+
+		public InstantSaveData() { }
+		public InstantSaveData(CharacterBase character)
+		{
+			id = character.IdentityKey;
+			Pos = character.Pos;
+			Direction = character.CurrentDir;
+		}
+	}
+
+	[System.Serializable]
+	public class SaveData
+	{
+		public string id;
+
+		public SaveData() { }
+		public SaveData(CharacterBase character)
+		{
+			id = character.IdentityKey;
+		}
+	}
+
 	[Range(0, 2)] public float MoveSecond = 0.1f;
 	[SerializeField] protected RPGSceneManager RPGSceneManager;
 
@@ -19,6 +47,10 @@ public class CharacterBase : MonoBehaviour
 	static readonly string TRIGGER_MoveLeft = "MoveLeftTrigger";
 	static readonly string TRIGGER_MoveRight = "MoveRightTrigger";
 	static readonly string TRIGGER_MoveUp = "MoveUpTrigger";
+
+	Vector3Int InitialPos { get; set; }
+	public bool IsActive { get => gameObject.activeSelf; set => gameObject.SetActive(value); }
+	public string IdentityKey { get => $"{gameObject.name}_{GetType().Name}_{InitialPos}"; }
 
 	Coroutine _moveCoroutine;
 	[SerializeField] Vector3Int _pos;
@@ -60,6 +92,7 @@ public class CharacterBase : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		InitialPos = Pos;
 		SetDirAnimation(_currentDir);
 	}
 
@@ -168,5 +201,16 @@ public class CharacterBase : MonoBehaviour
 		{
 			return null;
 		}
+	}
+
+
+	public virtual InstantSaveData GetInstantSaveData()
+	{
+		return new InstantSaveData(this);
+	}
+
+	public virtual SaveData GetSaveData()
+	{
+		return null;
 	}
 }

@@ -10,6 +10,7 @@ public class RPGSceneManager : MonoBehaviour
 	public Menu Menu;
 	public ItemShopMenu ItemShopMenu;
 	public Vector3Int MassEventPos { get; private set; }
+	public ItemList ItemList;
 	[SerializeField] public BattleWindow BattleWindow;
 	[SerializeField, TextArea(3, 15)] string GameOverMessage = "体力が無くなった...";
 	[SerializeField] Map RespawnMapPrefab;
